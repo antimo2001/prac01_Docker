@@ -49,10 +49,26 @@ A service only runs one image, but it codifies the way that image runs—what po
 
 A registry is a collection of repositories, and a repository is a collection of images—sort of like a GitHub repository, except the code is already built. An account on a registry can create many repositories.
 
+A single container running in a service is called a **task**. Tasks are given unique IDs that numerically increment, up to the number of replicas you defined in docker-compose.yml.
+
+```bash
+docker stack ls                                            # List stacks or apps
+docker stack deploy -c <composefile> <appname>  # Run the specified Compose file
+docker service ls                 # List running services associated with an app
+docker service ps <service>                  # List tasks associated with an app
+docker inspect <task or container>                   # Inspect task or container
+docker container ls -q                                      # List container IDs
+docker stack rm <appname>                             # Tear down an application
+docker swarm leave --force      # Take down a single node swarm from the manager
+```
+
 ## Appendix: Docker Terminology
 
 - Image: an installation of software (it is NOT running yet)
 - Container: a running app of your software (like a Virtual Machine that has been booted up)
 - Repository: contains a group of Docker Images
 - Registry: contains a group of Docker Repositories
-- Service: is a dockr container and is usually grouped with other services to collaborate together
+- Service: is a docker container and is grouped with other services to collaborate together
+- Task: a single container running within a service
+- Swarm: is a group of services? that's either running/not-running?
+
